@@ -59,7 +59,29 @@ function NguoiDungService() {
     })
   }
 
-  this.suaNguoiDung = function(taikhoan){
+  this.layViTriNguoiDung = function (taikhoan){
+    var viTri;
+    var danhSachNguoiDung = JSON.parse(localStorage.getItem("DSND"));
+    // danhSachNguoiDung.map(function(item,index){
+    //   if (item.TaiKhoan === taikhoan) {
+    //     viTri = index;
+    //     return viTri;
+    //   }
+    // })
+    return danhSachNguoiDung.findIndex(function(item){
+      return item.TaiKhoan === taikhoan;
+    });
 
+      // return viTri;
+    
+  }
+  this.layThongTinNguoiDung = function (taikhoan){
+    var danhSachNguoiDung = JSON.parse(localStorage.getItem("DSND"));
+     return danhSachNguoiDung.find(function(item){
+      return item.TaiKhoan === taikhoan;
+    })
+  }
+  this.suaNguoiDung = function(taikhoan){
+    console.log(23);
   }
 }

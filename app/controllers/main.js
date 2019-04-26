@@ -22,6 +22,18 @@ $(document).ready(function() {
   // delegate,on,live,bind,addeventlistener
   $("body").on("click", ".btnSua", function() {
     getInput("Sửa người dùng", "Cập nhật", "btnCapNhat");
+    var taikhoan = $(this).data('taikhoan');
+    // var index = nguoiDungService.layViTriNguoiDung(taikhoan);
+    var nguoiDung = nguoiDungService.layThongTinNguoiDung(taikhoan);
+
+    console.log(nguoiDung);
+    // $("#TaiKhoan").val(taikhoan);
+    $("#HoTen").val(nguoiDung.TaiKhoan);
+    $("#MatKhau").val(nguoiDung.MatKhau);
+    $("#Email").val(nguoiDung.Email);
+    $("#SoDienThoai").val(nguoiDung.SoDT);
+    $("#loaiNguoiDung").val(nguoiDung.TenLoaiNguoiDung);
+
   });
 
   $("body").delegate("#btnThem", "click", function() {
@@ -56,7 +68,8 @@ $(document).ready(function() {
       .done(function(result) {
         // console.log(result);
         taoBang(result);
-        sessionStorage.setItem("DSND",JSON.stringify(result));
+        localStorage.setItem("DSND",JSON.stringify(result));
+        nguoiDungService.DSND = result;
       })
       .fail(function(err) {
         console.log(err);
@@ -79,7 +92,7 @@ $(document).ready(function() {
             <td>${item.SoDT}</td>
             <td>${item.TenLoaiNguoiDung}</td>
             <td>
-            <button class="btn btn-success btnSua"  data-toggle="modal" data-target="#myModal">Sửa</button>
+            <button class="btn btn-success btnSua"  data-toggle="modal" data-target="#myModal" data-taikhoan="${item.TaiKhoan}">Sửa</button>
             <button class="btn btn-danger btnXoa" data-taikhoan="${item.TaiKhoan}">Xóa</button>
             </td>
 
